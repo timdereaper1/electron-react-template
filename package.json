@@ -1,43 +1,87 @@
 {
-  "name": "electron-react-template",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "electron-react-template",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": ".",
+	"main": "build/electron/main.js",
+	"dependencies": {
+		"react": "17.0.1",
+		"react-dom": "17.0.1",
+		"web-vitals": "0.2.4"
+	},
+	"author": {
+		"url": "https://digigatesolutions.com",
+		"email": "kofiamo.timothy@gmail.com",
+		"name": "Amo Timothy Kofi"
+	},
+	"description": "An electron react template",
+	"scripts": {
+		"start": "cross-env BROWSER=none SKIP_PREFLIGHT_CHECK=true rescripts start",
+		"build": "cross-env SKIP_PREFLIGHT_CHECK=true rescripts build",
+		"test": "cross-env SKIP_PREFLIGHT_CHECK=true rescripts test",
+		"eject": "rescripts eject",
+		"postinstall": "electron-builder install-app-deps",
+		"start:electron": "yarn compile:dev && electron .",
+		"compile:dev": "wait-on http://localhost:3000 && yarn webpack:dev",
+		"webpack:dev": "cross-env NODE_ENV=development webpack",
+		"dev": "concurrently \"yarn start\" \"yarn start:electron\"",
+		"build:electron": "cross-env NODE_ENV=production webpack",
+		"package": "yarn build && yarn build:electron && electron-builder"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@rescripts/cli": "0.0.15",
+		"@rescripts/rescript-env": "0.0.12",
+		"@testing-library/jest-dom": "5.11.4",
+		"@testing-library/react": "11.1.0",
+		"@testing-library/user-event": "12.1.10",
+		"@types/electron": "1.6.10",
+		"@types/electron-is-dev": "1.1.1",
+		"@types/jest": "26.0.15",
+		"@types/node": "12.0.0",
+		"@types/react": "16.9.53",
+		"@types/react-dom": "16.9.8",
+		"concurrently": "5.3.0",
+		"cross-env": "7.0.3",
+		"electron": "11.1.1",
+		"electron-builder": "22.9.1",
+		"electron-devtools-installer": "3.1.1",
+		"rimraf": "3.0.2",
+		"ts-loader": "8.0.13",
+		"typescript": "4.0.3",
+		"react-scripts": "4.0.1",
+		"wait-on": "5.2.1",
+		"webpack": "5.11.1",
+		"webpack-cli": "4.3.1",
+		"webpack-node-externals": "2.5.2"
+	},
+	"build": {
+		"appId": "com.electron.react",
+		"productName": "Electron React Template",
+		"copyright": "Copyright © 2020 ${author}",
+		"extends": null,
+		"files": [
+			"build/**/*"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
+	}
 }
