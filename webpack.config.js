@@ -6,8 +6,8 @@ module.exports = {
 	entry: './src/main.ts',
 	mode: process.env.NODE_ENV || 'production',
 	output: {
-		filename: 'main.js',
-		path: path.join(__dirname, './build/electron'),
+		filename: 'electron.js',
+		path: path.join(__dirname, './build'),
 	},
 	module: {
 		rules: [
